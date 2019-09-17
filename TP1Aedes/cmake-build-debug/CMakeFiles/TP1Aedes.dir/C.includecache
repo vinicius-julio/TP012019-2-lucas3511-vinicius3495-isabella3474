@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/lucbp/CLionProjects/TP1Aedes/TAD_MatEsparca.c
+TAD_MatEsparca.h
+C:/Users/lucbp/CLionProjects/TP1Aedes/TAD_MatEsparca.h
+
+C:/Users/lucbp/CLionProjects/TP1Aedes/TAD_MatEsparca.h
+
+C:/Users/lucbp/CLionProjects/TP1Aedes/main.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+TAD_MatEsparca.c
+C:/Users/lucbp/CLionProjects/TP1Aedes/TAD_MatEsparca.c
+
