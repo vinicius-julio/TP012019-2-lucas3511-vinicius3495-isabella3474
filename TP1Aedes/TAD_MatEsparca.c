@@ -1,40 +1,65 @@
 #include "TAD_MatEsparca.h"
-int InicializaLinha(TCelula *celula, TLista *lista, int i){
-    for (int aux = 0; aux < i; ++aux){
-        lista->Ultimo->direita = (Apontador) sizeof(TCelula); //Direita points to nova celula
-        lista->Ultimo = lista->Ultimo->direita;               //Ultimo points to nova celula
-        lista->Ultimo->direita = lista->Primeiro->direita;    //Direita(NC) points to celula principal
-        lista->Ultimo->coluna = aux;                          //Valor da coluna é o mesmo de aux
+int InicializaColuna(TLista *lista, int j) {
+    int aux;
+    for (aux = 0; aux < j; aux++){
+    lista->Ultimoc->direita = (Apontador) malloc(sizeof(TCelula)); //Direita points to nova celula
+    lista->Ultimoc = lista->Ultimoc->direita;                       //Ultimo points to nova celula
+    lista->Ultimoc->linha = 0;                                   //Valor da coluna é o mesmo de aux
+    lista->Ultimoc->coluna = -1;
+    lista->Ultimoc->item.valor = 0;
+    lista->Ultimoc->direita = lista->Primeiroc;            //Direita(NC) points to celula principal
     }
     return 1;
 }
-int InicializaColuna(TCelula *celula, TLista *lista, int j){
-    for (int aux = 0; aux < j; ++aux){
-        lista->Ultimo->abaixo = (Apontador) sizeof(TCelula); //Abaixo points to nova celula
-        lista->Ultimo = lista->Ultimo->abaixo;               //Ultimo points to nova celula
-        lista->Ultimo->abaixo = lista->Primeiro->abaixo;     //Abaixo(NC) points to celula principal
-        lista->Ultimo->linha = aux;                          //Valor da linha é o mesmo de aux
+int InicializaLinha(TLista *lista, int i){
+    int aux;
+    for (aux = 0; aux < i; ++aux){
+        lista->Ultimol->abaixo = (Apontador) malloc(sizeof(TCelula)); //Abaixo points to nova celula
+        lista->Ultimol = lista->Ultimol->abaixo;                       //Ultimo points to nova celula
+        lista->Ultimol->linha = -1;                                   //Valor da linha é o mesmo de aux
+        lista->Ultimol->coluna = 0;
+        lista->Ultimol->item.valor = 0;
+        lista->Ultimol->abaixo = lista->Primeirol;             //Abaixo(NC) points to celula principal
     }
     return 1;
 }
-int InicializaMatriz(TCelula *celula, TLista *lista, int  i, int j){
-
+int InicializaMatriz(TLista *lista){
     //Criação da célula cabeça principal
-    lista->Primeiro = (Apontador) sizeof(TCelula);           //Inicializa célula cabeça Principal
-    lista->Ultimo = lista->Primeiro;                         //Ultimo aponta para Primeiro (própria célula)
-    lista->Primeiro->direita = lista->Ultimo;                //Direita aponta para Ultimo  (própria célula)
-    lista->Primeiro->abaixo = lista->Ultimo;                 //Abaixo aponta para Ultimo   (própria célula)
-    celula->linha = -1;                                      //Define célula principal (linha -1 por convenção)
-    celula->coluna = -1;                                     //Define célula principal (coluna -1 por convenção)
-    celula->valor = 0;                                       //Valor da célula (nulo) já que se trata de célula cabeça
-
-    //Células cabeça criadas a partir da principal de acordo com o número de linhas e colunas
-
-    //Linhas
-    InicializaLinha(&celula, &lista, i);
-
-    //Colunas
-    InicializaColuna(&celula, &lista, j);
+    lista->Primeirol = (Apontador) malloc(sizeof(TCelula));   //Inicializa célula cabeça Principal
+    lista->Ultimol = lista->Primeirol;                         //Ultimo aponta para Primeiro (própria célula)
+    lista->Ultimol->direita = lista->Primeirol;                //Direita aponta para Ultimo  (própria célula)
+    lista->Ultimol->abaixo = lista->Ultimol;                 //Abaixo aponta para Ultimo   (própria célula)
+    lista->Ultimol->linha = -1;                          //Define célula principal (linha -1 por convenção)
+    lista->Ultimol->coluna = -1;                         //Define célula principal (coluna -1 por convenção)
+    lista->Ultimol->item.valor = 0;                           //Valor da célula (nulo) já que se trata de célula cabeça
+    lista->Primeiroc = lista->Primeirol;
+    lista->Ultimoc = lista->Ultimol;
 
     return 1;
+}
+
+void ImprimeMatrizC(TLista *lista, int j){
+    Apontador aux;
+    int next;
+    aux = lista->Primeiroc->direita;
+    for(next = 0; next < j; ++next){
+        printf("%d\n", aux->linha);
+        printf("%d\n", aux->coluna);
+        printf("%f\n", aux->item.valor);
+        printf("\n");
+        aux = aux->direita;
+    }
+}
+
+void ImprimeMatrizL(TLista *lista, int i){
+    Apontador aux;
+    int next;
+    aux = lista->Primeirol->abaixo;
+    for(next = 0; next < i; ++next){
+        printf("%d\n", aux->linha);
+        printf("%d\n", aux->coluna);
+        printf("%f\n", aux->item.valor);
+        printf("\n");
+        aux = aux->abaixo;
+    }
 }

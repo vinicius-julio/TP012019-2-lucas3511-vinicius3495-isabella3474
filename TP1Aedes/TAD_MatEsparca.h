@@ -1,23 +1,29 @@
 #ifndef TP1AEDES_TAD_MATESPARCA_H
 #define TP1AEDES_TAD_MATESPARCA_H
 
-typedef struct Celula* Apontador;
+typedef struct Celula *Apontador;
+
+typedef struct{
+    double valor;
+}TItem;
 
 typedef struct Celula{
-    Apontador *direita, *abaixo;
+    Apontador direita, abaixo;
     int linha, coluna;
-    double valor;
+    TItem item;
 }TCelula;
 
 typedef struct{
-    Apontador Primeiro, Ultimo;
+    Apontador Primeirol, Ultimol;
+    Apontador Primeiroc, Ultimoc;
 }TLista;
 
-int InicializaMatriz(TCelula *celula, TLista *lista, int i, int j); //Inicializa matriz completa
-int InicializaLinha(TCelula *celula, TLista *lista, int i); //Inicializa linha da matriz
-int InicializaColuna(TCelula *celula, TLista *lista, int j); //Inicializa coluna da matriz
+int InicializaMatriz(TLista *lista); //Inicializa matriz completa
+int InicializaLinha(TLista *lista, int i); //Inicializa linha da matriz
+int InicializaColuna(TLista *lista, int j); //Inicializa coluna da matriz
 int LeMatriz();
 int InsereMatriz();
-int ImprimeMatriz();
+void ImprimeMatrizC(TLista *lista, int j);
+void ImprimeMatrizL(TLista *lista, int i);
 
 #endif //TP1AEDES_TAD_MATESPARCA_H

@@ -7,21 +7,31 @@ int main() {
     int checkfunctionL, checkfunctionC, checkfunctionM;
     TCelula *celula;
     TLista lista;
+    TItem item;
     printf("Digite o numero de linhas\n");
     scanf("%d", &i);
     printf("Digite o numero de colunas\n");
     scanf("%d", &j);
-    InicializaMatriz(&celula, &lista, i, j);
-    checkfunctionL = InicializaLinha(&celula, &lista, i);
-    checkfunctionC = InicializaLinha(&celula, &lista, i);
-    checkfunctionM = InicializaLinha(&celula, &lista, i);
+
+    //Inicializa Matriz
+    checkfunctionM = InicializaMatriz(&lista);
+    //Células cabeça criadas a partir da principal de acordo com o número de linhas e colunas
+    //Linhas
+    checkfunctionC = InicializaColuna(&lista, j);
+    //colunas
+    checkfunctionL = InicializaLinha(&lista, i);
+
+
+
     if(checkfunctionL == 1 && checkfunctionC == 1 && checkfunctionM == 1){
-        printf("linha inicializada com sucesso\n");
-        printf("coluna inicializada com sucesso\n");
-        printf("matriz incializada com sucesso\n");
+        printf("Linha inicializada com sucesso...\n");
+        printf("Coluna inicializada com sucesso...\n");
+        printf("Matriz incializada com sucesso!\n");
     } else{
         printf("Matriz não inicializada\n");
     }
-    printf("Hello, World!\n");
+    ImprimeMatrizL(&lista, i);
+    ImprimeMatrizC(&lista, j);
+
     return 0;
 }
