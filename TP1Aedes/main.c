@@ -3,16 +3,18 @@
 #include <string.h>
 #include "TAD_MatEsparca.c"
 int main() {
-    int i, j;
+    int i, j, linha, coluna;
+    double valor;
     int checkfunctionL, checkfunctionC, checkfunctionM;
     TCelula *celula;
     TLista lista;
     TItem item;
+    int cod_op;
+
     printf("Digite o numero de linhas\n");
     scanf("%d", &i);
     printf("Digite o numero de colunas\n");
     scanf("%d", &j);
-
     //Inicializa Matriz
     checkfunctionM = InicializaMatriz(&lista);
     //Células cabeça criadas a partir da principal de acordo com o número de linhas e colunas
@@ -21,8 +23,6 @@ int main() {
     //colunas
     checkfunctionL = InicializaLinha(&lista, i);
 
-
-
     if(checkfunctionL == 1 && checkfunctionC == 1 && checkfunctionM == 1){
         printf("Linha inicializada com sucesso...\n");
         printf("Coluna inicializada com sucesso...\n");
@@ -30,8 +30,51 @@ int main() {
     } else{
         printf("Matriz não inicializada\n");
     }
-    ImprimeMatrizL(&lista, i);
-    ImprimeMatrizC(&lista, j);
 
+    do{
+        printf("Entre com a operacao desejada:\n");
+        printf("*****************************************\n");
+        printf("| Codigos de operacao:                  |\n");
+        printf("| 1 - Insere                            |\n");
+        printf("| 2 - Imprime Matriz                    |\n");
+        printf("| 3 - Imprime cabecas                   |\n");
+        printf("| 0 - Encerra                           |\n");
+        printf("*****************************************\n");
+        fflush(stdin);
+        scanf("%d", &cod_op);
+        if(cod_op == 1){
+            printf("Insira os dados da celula (linha, coluna e valor)\n");
+
+            scanf("%d %d %lf", &linha, &coluna, &valor);
+
+            InsereMatriz(&lista, celula, i, j, coluna, linha, valor);
+        }
+        else if(cod_op == 2){
+            printf("%d\n", lista.principal->abaixo->direita->direita->linha);
+            printf("%d\n", lista.principal->abaixo->direita->direita->coluna);
+            printf("%lf\n", lista.principal->abaixo->direita->direita->item.valor);
+            //ImprimeMatriz(&lista, linha);
+        }
+        else if(cod_op == 3){
+            ImprimeMatrizL(&lista, i);
+            ImprimeMatrizC(&lista, j);
+        }
+        else if(cod_op == 4){
+
+        }
+
+    }while(cod_op != 0);
+
+    /*
+    //Entrada por Arquivo
+    char nome_arq[100];
+    char texto[1000];
+    scanf("%s", &nome_arq);
+    FILE *ptr_arq;
+    ptr_arq = fopen(nome_arq, "r");
+    while(strcpy(texto, ptr_arq) != NULL) {
+        printf("%s", texto);
+    }
+     */
     return 0;
 }
