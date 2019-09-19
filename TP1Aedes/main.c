@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "TAD_MatEsparca.c"
+
 int main() {
     int i, j, linha, coluna;
     double valor;
     int checkfunctionL, checkfunctionC, checkfunctionM;
     TCelula *celula;
     TLista lista;
-    TItem item;
     int cod_op;
 
     printf("Digite o numero de linhas\n");
@@ -47,13 +47,18 @@ int main() {
 
             scanf("%d %d %lf", &linha, &coluna, &valor);
 
-            InsereMatriz(&lista, celula, i, j, coluna, linha, valor);
+            InsereMatriz(&lista, i, j, coluna, linha);
         }
         else if(cod_op == 2){
-            printf("%d\n", lista.principal->abaixo->direita->direita->linha);
-            printf("%d\n", lista.principal->abaixo->direita->direita->coluna);
-            printf("%lf\n", lista.principal->abaixo->direita->direita->item.valor);
-            //ImprimeMatriz(&lista, linha);
+            printf("%d\n", lista.principal->abaixo->abaixo->abaixo->direita->direita->linha);
+            printf("%d\n", lista.principal->abaixo->abaixo->abaixo->direita->direita->coluna);
+
+            printf("%d\n", lista.principal->abaixo->abaixo->direita->direita->linha);
+            printf("%d\n", lista.principal->abaixo->abaixo->direita->direita->coluna);
+
+            printf("%d\n", lista.principal->abaixo->abaixo->direita->direita->direita->linha);
+            printf("%d\n", lista.principal->abaixo->abaixo->direita->direita->direita->coluna);
+            ImprimeMatriz(&lista, linha);
         }
         else if(cod_op == 3){
             ImprimeMatrizL(&lista, i);
