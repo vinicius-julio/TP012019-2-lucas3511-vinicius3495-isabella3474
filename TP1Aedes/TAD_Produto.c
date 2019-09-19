@@ -17,3 +17,12 @@ int Insere(TLisprod *lisprod, TProdutos *produtos){
 
     return (lisprod->qtdprod);
 }
+
+void Imprime(TLisprod *lisprod){
+    Apontadorp aux;
+    aux = lisprod->Primeiro->prox;
+    while(aux != NULL){
+        printf("%d %s\n", aux->produtos.qtdproduto, aux->produtos.datacompra);
+        aux = aux->prox;
+    }
+}

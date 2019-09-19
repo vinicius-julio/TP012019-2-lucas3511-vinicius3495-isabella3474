@@ -62,13 +62,15 @@ void ImprimeMatrizL(TLista *lista, int i){
     }
 }
 
-void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha){
+void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha,TProdutos *produtos){
     Apontador newcel;
     Apontador aux;
     int next;
     newcel = (Apontador)malloc(sizeof(TCelula));
     newcel->linha = linha;
     newcel->coluna = coluna;
+    InicializaProd(&newcel->lisprod);
+    Insere(&newcel->lisprod, &produtos);
     aux = lista->principal->direita;
     //percorre coluna
     for(next = 0; next < newcel->coluna; next++){

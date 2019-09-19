@@ -2,12 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "TAD_MatEsparca.c"
+#include "TAD_Produto.c"
 
 int main() {
     int i, j, linha, coluna;
     double valor;
     int checkfunctionL, checkfunctionC, checkfunctionM;
     TCelula *celula;
+    TLisprod lisprod;
+    TProdutos produtos;
     TLista lista;
     int cod_op;
 
@@ -15,6 +18,9 @@ int main() {
     scanf("%d", &i);
     printf("Digite o numero de colunas\n");
     scanf("%d", &j);
+
+    //Inicializa lista
+    InicializaProd(&lisprod);
     //Inicializa Matriz
     checkfunctionM = InicializaMatriz(&lista);
     //Células cabeça criadas a partir da principal de acordo com o número de linhas e colunas
@@ -35,9 +41,11 @@ int main() {
         printf("Entre com a operacao desejada:\n");
         printf("*****************************************\n");
         printf("| Codigos de operacao:                  |\n");
-        printf("| 1 - Insere                            |\n");
+        printf("| 1 - Insere dados de compra            |\n");
         printf("| 2 - Imprime Matriz                    |\n");
         printf("| 3 - Imprime cabecas                   |\n");
+        printf("| 4 - Inserir Compra                    |\n");
+        printf("| 5 - Imprime lista de compra           |\n");
         printf("| 0 - Encerra                           |\n");
         printf("*****************************************\n");
         fflush(stdin);
@@ -45,9 +53,9 @@ int main() {
         if(cod_op == 1){
             printf("Insira os dados da celula (linha, coluna e valor)\n");
 
-            scanf("%d %d %lf", &linha, &coluna, &valor);
+            scanf("%d %d %s %d", &linha, &coluna, produtos.datacompra, &produtos.qtdproduto);
 
-            InsereMatriz(&lista, i, j, coluna, linha);
+            InsereMatriz(&lista, i, j, coluna, linha, &produtos);
         }
         else if(cod_op == 2){
             printf("%d\n", lista.principal->abaixo->abaixo->abaixo->direita->direita->linha);
@@ -65,9 +73,12 @@ int main() {
             ImprimeMatrizC(&lista, j);
         }
         else if(cod_op == 4){
-
+            scanf("%d %s", &produtos.qtdproduto, produtos.datacompra);
+            Insere(&lisprod, &produtos);
         }
-
+        else if(cod_op == 5){
+            Imprime(&lisprod);
+        }
     }while(cod_op != 0);
 
     /*

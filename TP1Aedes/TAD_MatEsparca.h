@@ -1,13 +1,13 @@
 #ifndef TP1AEDES_TAD_MATESPARCA_H
 #define TP1AEDES_TAD_MATESPARCA_H
-//#include "TAD_Produto.c"
+#include "TAD_Produto.h"
 
 typedef struct Celula *Apontador;
 
 typedef struct Celula{
     Apontador direita, abaixo;
     int linha, coluna;
-    //TLisprod lisprod;
+    TLisprod lisprod;
 }TCelula;
 
 typedef struct{
@@ -18,7 +18,7 @@ int InicializaMatriz(TLista *lista); //Inicializa matriz completa
 int InicializaLinha(TLista *lista, int i); //Inicializa linha da matriz
 int InicializaColuna(TLista *lista, int j); //Inicializa coluna da matriz
 int LeMatriz();
-void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha);
+void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha, TProdutos *produtos);
 void ImprimeMatrizC(TLista *lista, int j);
 void ImprimeMatrizL(TLista *lista, int i);
 void ImprimeMatriz(TLista *lista, int linha);

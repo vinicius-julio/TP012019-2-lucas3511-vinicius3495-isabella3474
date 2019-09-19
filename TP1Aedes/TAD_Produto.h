@@ -21,5 +21,6 @@ typedef struct{
 int InicializaProd(TLisprod *lisprod);
 int ListaVprod(TLisprod *lisprod);
 int Insere(TLisprod *lisprod, TProdutos *produtos);
+void Imprime(TLisprod *lisprod);
 
 #endif //TP1AEDES_TAD_PRODUTO_H

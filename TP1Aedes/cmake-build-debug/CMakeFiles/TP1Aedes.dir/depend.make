@@ -3,5 +3,7 @@
 
 CMakeFiles/TP1Aedes.dir/main.c.obj: ../TAD_MatEsparca.c
 CMakeFiles/TP1Aedes.dir/main.c.obj: ../TAD_MatEsparca.h
+CMakeFiles/TP1Aedes.dir/main.c.obj: ../TAD_Produto.c
+CMakeFiles/TP1Aedes.dir/main.c.obj: ../TAD_Produto.h
 CMakeFiles/TP1Aedes.dir/main.c.obj: ../main.c
 
