@@ -21,6 +21,6 @@ int LeMatriz();
 void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha, TProdutos *produtos);
 void ImprimeMatrizC(TLista *lista, int j);
 void ImprimeMatrizL(TLista *lista, int i);
-void ImprimeMatriz(TLista *lista, int linha);
+void ImprimeMatriz(TLista *lista, TLisprod *lisprod);
 
 #endif //TP1AEDES_TAD_MATESPARCA_H

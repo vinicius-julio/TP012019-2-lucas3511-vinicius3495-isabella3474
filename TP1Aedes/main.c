@@ -58,15 +58,7 @@ int main() {
             InsereMatriz(&lista, i, j, coluna, linha, &produtos);
         }
         else if(cod_op == 2){
-            printf("%d\n", lista.principal->abaixo->abaixo->abaixo->direita->direita->linha);
-            printf("%d\n", lista.principal->abaixo->abaixo->abaixo->direita->direita->coluna);
-
-            printf("%d\n", lista.principal->abaixo->abaixo->direita->direita->linha);
-            printf("%d\n", lista.principal->abaixo->abaixo->direita->direita->coluna);
-
-            printf("%d\n", lista.principal->abaixo->abaixo->direita->direita->direita->linha);
-            printf("%d\n", lista.principal->abaixo->abaixo->direita->direita->direita->coluna);
-            ImprimeMatriz(&lista, linha);
+            ImprimeMatriz(&lista, &lisprod);
         }
         else if(cod_op == 3){
             ImprimeMatrizL(&lista, i);

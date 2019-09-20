@@ -72,11 +72,17 @@ void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha,TProdutos *
     InicializaProd(&newcel->lisprod);
     Insere(&newcel->lisprod, &produtos);
     aux = lista->principal->direita;
+
     //percorre coluna
-    for(next = 0; next < newcel->coluna; next++){
+    for(next = 1; next < coluna; next++){
         aux = aux->direita;
     }
-    while(linha > aux->abaixo->linha && aux->abaixo->linha != 0){
+    while(coluna >= aux->abaixo->coluna && aux->coluna < aux->abaixo->coluna){
+        if(linha == aux->abaixo->linha && aux->abaixo->coluna == coluna) {
+            aux->abaixo->lisprod = newcel->lisprod;
+            free(newcel);
+            return;
+        }
         aux = aux->abaixo;
     }
     newcel->abaixo = aux->abaixo;
@@ -84,31 +90,36 @@ void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha,TProdutos *
 
     aux = lista->principal->abaixo;
     //percorre linha
-    for(next = 0; next < newcel->linha; next++){
+
+    for(next = 1; next < linha; next++){
         aux = aux->abaixo;
     }
-    while(coluna > aux->direita->coluna && aux->direita->coluna != 0){
+    while(linha >= aux->direita->linha && aux->linha< aux->direita->linha){
         aux = aux->direita;
     }
     newcel->direita = aux->direita;
     aux->direita = newcel;
 }
 
-void ImprimeMatriz(TLista *lista, int linha){
+void ImprimeMatriz(TLista *lista, TLisprod *lisprod){
     Apontador aux;
     aux = lista->principal->abaixo;
-    printf("OK\n");
-    printf("%d\n", aux->linha);
-    printf("%d\n", aux->coluna);
-    while (aux->linha == -1 && aux->coluna == -1){
-        printf("ok\n");
+    Apontadorp pAux;
+    pAux = lisprod->Primeiro->prox;
+
+    while (aux->coluna != -1){
+
         aux = aux->direita;
-        if(aux->linha == -1 && aux->coluna == 0){
+
+        if(aux->linha == -1){
             printf("\n");
-            aux = aux->abaixo->direita;
-        }else{
+            aux = aux->abaixo;
+        }else {
+            while (pAux != NULL){
+                printf("%d %s", &pAux->produtos.qtdproduto, pAux->produtos.datacompra);
+                pAux = pAux->prox;
+            }
         }
 
     }
-
 }
