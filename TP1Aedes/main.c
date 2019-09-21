@@ -5,8 +5,7 @@
 #include "TAD_Produto.c"
 
 int main() {
-    int i, j, linha, coluna;
-    double valor;
+    int i, j, linha, coluna, valor;
     int checkfunctionL, checkfunctionC, checkfunctionM;
     TCelula *celula;
     TLisprod lisprod;
@@ -55,10 +54,10 @@ int main() {
 
             scanf("%d %d %s %d", &linha, &coluna, produtos.datacompra, &produtos.qtdproduto);
 
-            InsereMatriz(&lista, i, j, coluna, linha, &produtos);
+            InsereMatriz(&lista, coluna, linha, &produtos);
         }
         else if(cod_op == 2){
-            ImprimeMatriz(&lista, &lisprod);
+            ImprimeMatriz(&lista);
         }
         else if(cod_op == 3){
             ImprimeMatrizL(&lista, i);

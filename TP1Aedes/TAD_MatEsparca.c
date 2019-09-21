@@ -62,7 +62,7 @@ void ImprimeMatrizL(TLista *lista, int i){
     }
 }
 
-void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha,TProdutos *produtos){
+void InsereMatriz(TLista *lista, int coluna, int linha,TProdutos *produtos){
     Apontador newcel;
     Apontador aux;
     int next;
@@ -70,16 +70,17 @@ void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha,TProdutos *
     newcel->linha = linha;
     newcel->coluna = coluna;
     InicializaProd(&newcel->lisprod);
-    Insere(&newcel->lisprod, &produtos);
+    Insere(&newcel->lisprod, produtos);
+
+    // percorre coluna
     aux = lista->principal->direita;
 
-    //percorre coluna
     for(next = 1; next < coluna; next++){
         aux = aux->direita;
     }
-    while(coluna >= aux->abaixo->coluna && aux->coluna < aux->abaixo->coluna){
+    while(linha >= aux->abaixo->linha && aux->linha < aux->abaixo->linha && aux->abaixo->coluna != -1){
         if(linha == aux->abaixo->linha && aux->abaixo->coluna == coluna) {
-            aux->abaixo->lisprod = newcel->lisprod;
+            Insere(&aux->abaixo->lisprod, produtos);
             free(newcel);
             return;
         }
@@ -88,24 +89,29 @@ void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha,TProdutos *
     newcel->abaixo = aux->abaixo;
     aux->abaixo = newcel;
 
-    aux = lista->principal->abaixo;
     //percorre linha
+    aux = lista->principal->abaixo;
 
     for(next = 1; next < linha; next++){
         aux = aux->abaixo;
     }
-    while(linha >= aux->direita->linha && aux->linha< aux->direita->linha){
+    while(coluna >= aux->direita->coluna && aux->coluna < aux->direita->coluna && aux->direita->linha != -1){
+        if(linha == aux->direita->linha && aux->direita->coluna == coluna) {
+            Insere(&aux->abaixo->lisprod, produtos);
+            free(newcel);
+            return;
+        }
         aux = aux->direita;
     }
     newcel->direita = aux->direita;
     aux->direita = newcel;
+
+
 }
 
-void ImprimeMatriz(TLista *lista, TLisprod *lisprod){
+void ImprimeMatriz(TLista *lista){
     Apontador aux;
     aux = lista->principal->abaixo;
-    Apontadorp pAux;
-    pAux = lisprod->Primeiro->prox;
 
     while (aux->coluna != -1){
 
@@ -115,11 +121,14 @@ void ImprimeMatriz(TLista *lista, TLisprod *lisprod){
             printf("\n");
             aux = aux->abaixo;
         }else {
-            while (pAux != NULL){
-                printf("%d %s", &pAux->produtos.qtdproduto, pAux->produtos.datacompra);
-                pAux = pAux->prox;
-            }
+            Imprime(&aux->abaixo->lisprod);
         }
 
     }
 }
+
+
+
+
+
+

@@ -8,6 +8,7 @@ typedef struct Celula{
     Apontador direita, abaixo;
     int linha, coluna;
     TLisprod lisprod;
+    int valor;
 }TCelula;
 
 typedef struct{
@@ -18,9 +19,9 @@ int InicializaMatriz(TLista *lista); //Inicializa matriz completa
 int InicializaLinha(TLista *lista, int i); //Inicializa linha da matriz
 int InicializaColuna(TLista *lista, int j); //Inicializa coluna da matriz
 int LeMatriz();
-void InsereMatriz(TLista *lista, int i, int j, int coluna, int linha, TProdutos *produtos);
+void InsereMatriz(TLista *lista, int coluna, int linha, TProdutos *produtos);
 void ImprimeMatrizC(TLista *lista, int j);
 void ImprimeMatrizL(TLista *lista, int i);
-void ImprimeMatriz(TLista *lista, TLisprod *lisprod);
+void ImprimeMatriz(TLista *lista);
 
 #endif //TP1AEDES_TAD_MATESPARCA_H
