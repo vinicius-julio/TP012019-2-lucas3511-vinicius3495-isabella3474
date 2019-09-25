@@ -18,10 +18,15 @@ typedef struct{
 int InicializaMatriz(TLista *lista); //Inicializa matriz completa
 int InicializaLinha(TLista *lista, int i); //Inicializa linha da matriz
 int InicializaColuna(TLista *lista, int j); //Inicializa coluna da matriz
-int LeMatriz();
+
 void InsereMatriz(TLista *lista, int coluna, int linha, TProdutos *produtos);
+
 void ImprimeMatrizC(TLista *lista, int j);
 void ImprimeMatrizL(TLista *lista, int i);
 void ImprimeMatriz(TLista *lista);
+
+int LeMatriz();
+int qtdCompraporProduto(TLista *lista, TLisprod *lisprod, int coluna);
+int qtdCompraporCliente(TLista *lista, TLisprod *lisprod, int linha);
 
 #endif //TP1AEDES_TAD_MATESPARCA_H

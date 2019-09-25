@@ -5,13 +5,32 @@
 #include "TAD_Produto.c"
 
 int main() {
-    int i, j, linha, coluna, valor;
+    int i, j, linha, coluna, qtdcompra;
     int checkfunctionL, checkfunctionC, checkfunctionM;
     TCelula *celula;
     TLisprod lisprod;
     TProdutos produtos;
     TLista lista;
     int cod_op;
+
+    //Entrada por Arquivo
+    char nome_arq[100];
+    char texto[100];
+    printf("Entre com o nome do arquivo a ser lido:\n");
+    scanf("%s", nome_arq);
+    FILE *ptr_arq;
+    ptr_arq = fopen(nome_arq, "r");
+    if(ptr_arq == NULL){
+        printf("Erro na abertura!\n");
+        exit(1);
+    }
+    while(!feof(ptr_arq)) {
+        fgets(texto, 3, ptr_arq);//A VARIAVEL "str" IRÁ RECEBER A LINHA DO ARQUIVO
+        printf("%s\n", texto);
+        linha = texto[0];
+        printf("%d\n", linha);
+    }
+
 
     printf("Digite o numero de linhas\n");
     scanf("%d", &i);
@@ -45,12 +64,14 @@ int main() {
         printf("| 3 - Imprime cabecas                   |\n");
         printf("| 4 - Inserir Compra                    |\n");
         printf("| 5 - Imprime lista de compra           |\n");
+        printf("| 6 - Qtd compra por cliente            |\n");
+        printf("| 7 - Qtd compra por produto            |\n");
         printf("| 0 - Encerra                           |\n");
         printf("*****************************************\n");
         fflush(stdin);
         scanf("%d", &cod_op);
         if(cod_op == 1){
-            printf("Insira os dados da celula (linha, coluna e valor)\n");
+            printf("Insira os dados da celula (cliente, produto, data de compra e qtd)\n");
 
             scanf("%d %d %s %d", &linha, &coluna, produtos.datacompra, &produtos.qtdproduto);
 
@@ -70,6 +91,17 @@ int main() {
         else if(cod_op == 5){
             Imprime(&lisprod);
         }
+        else if(cod_op == 6){
+            scanf("%d", &linha);
+            qtdcompra = qtdCompraporCliente(&lista, &lisprod, linha);
+            printf("%d\n", qtdcompra);
+        }
+        else if(cod_op == 7){
+            scanf("%d", &coluna);
+            qtdcompra = qtdCompraporProduto(&lista, &lisprod, coluna);
+            printf("%d\n", qtdcompra);
+        }
+
     }while(cod_op != 0);
 
     /*

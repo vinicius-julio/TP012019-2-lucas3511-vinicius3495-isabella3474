@@ -112,19 +112,63 @@ void InsereMatriz(TLista *lista, int coluna, int linha,TProdutos *produtos){
 void ImprimeMatriz(TLista *lista){
     Apontador aux;
     aux = lista->principal->abaixo;
-
     while (aux->coluna != -1){
 
         aux = aux->direita;
+        if(aux->coluna == 1){
+            printf("\nCliente: %d\n",aux->linha);
+        }
 
         if(aux->linha == -1){
             printf("\n");
             aux = aux->abaixo;
         }else {
-            Imprime(&aux->abaixo->lisprod);
+            printf("Produto %d: ",aux->coluna);
+            Imprime(&aux->lisprod);
         }
 
     }
+}
+
+int qtdCompraporProduto(TLista *lista, TLisprod *lisprod, int coluna){
+    int next, qtdcompra;
+    Apontador aux;
+    Apontadorp pAux;
+    aux = lista->principal->direita;
+    qtdcompra = 0;
+    for (next = 0; next < coluna; next++) {
+        aux = aux->direita;
+    }
+    while(aux->abaixo->linha != 0 && aux->abaixo->coluna == -1){
+        aux = aux->abaixo;
+        pAux = lisprod->Primeiro;
+        while(pAux != NULL){
+            pAux = pAux->prox;
+            qtdcompra += pAux->produtos.qtdproduto;
+        }
+    }
+
+    return qtdcompra;
+}
+int qtdCompraporCliente(TLista *lista, TLisprod *lisprod, int linha){
+    int next, qtdcompra;
+    Apontador aux;
+    Apontadorp pAux;
+    aux = lista->principal->abaixo;
+    qtdcompra = 0;
+    for (next = 0; next < linha; next++) {
+        aux = aux->direita;
+    }
+    while(aux->abaixo->linha != 0 && aux->abaixo->coluna == -1){
+        aux = aux->direita;
+        pAux = lisprod->Primeiro;
+        while(pAux != NULL){
+            pAux = pAux->prox;
+            qtdcompra += pAux->produtos.qtdproduto;
+        }
+    }
+
+    return qtdcompra;
 }
 
 
