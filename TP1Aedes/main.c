@@ -16,26 +16,24 @@ int main() {
     int qtd_i, qtd_j;
 
     //Entrada por Arquivo
-    FILE *ptr_arq;
-    printf("Digite o nome do arquivo:\n");
+    FILE *arq;
+
+
+    printf("Insira o nome do arquivo:\n");
     scanf("%s", nome_arq);
+    //printf("%s", nomearq);
 
-    ptr_arq = fopen(nome_arq, "r");
-
-    if (ptr_arq == NULL) {
+    arq = fopen(nome_arq, "r");
+    if (arq == NULL) {
         printf("Erro na abertura!\n");
-        perror((ptr_arq));
+        perror((arq));
         exit(1);
     }
 
-    fscanf(ptr_arq, "%d %d", &qtd_i, &qtd_j);
-    LeMatriz(ptr_arq, &lista, qtd_i, qtd_j);
-
-
-    //Inicializa lista
-    InicializaProd(&lisprod);
-    //Inicializa Matriz
-    InicializaMatriz(&lista);
+        //Inicializa lista
+        InicializaProd(&lisprod);
+        //Inicializa Matriz
+        InicializaMatriz(&lista);
 
 
     do{
