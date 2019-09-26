@@ -5,55 +5,38 @@
 #include "TAD_Produto.c"
 
 int main() {
-    int i, j, linha, coluna, qtdcompra;
+    int linha, coluna, qtdcompra;
     int checkfunctionL, checkfunctionC, checkfunctionM;
     TCelula *celula;
     TLisprod lisprod;
     TProdutos produtos;
     TLista lista;
     int cod_op;
+    char nome_arq[100];
+    int qtd_i, qtd_j;
 
     //Entrada por Arquivo
-    char nome_arq[100];
-    char texto[100];
-    printf("Entre com o nome do arquivo a ser lido:\n");
-    scanf("%s", nome_arq);
     FILE *ptr_arq;
+    printf("Digite o nome do arquivo:\n");
+    scanf("%s", nome_arq);
+
     ptr_arq = fopen(nome_arq, "r");
-    if(ptr_arq == NULL){
+
+    if (ptr_arq == NULL) {
         printf("Erro na abertura!\n");
+        perror((ptr_arq));
         exit(1);
     }
-    while(!feof(ptr_arq)) {
-        fgets(texto, 3, ptr_arq);//A VARIAVEL "str" IRÁ RECEBER A LINHA DO ARQUIVO
-        printf("%s\n", texto);
-        linha = texto[0];
-        printf("%d\n", linha);
-    }
 
+    fscanf(ptr_arq, "%d %d", &qtd_i, &qtd_j);
+    LeMatriz(ptr_arq, &lista, qtd_i, qtd_j);
 
-    printf("Digite o numero de linhas\n");
-    scanf("%d", &i);
-    printf("Digite o numero de colunas\n");
-    scanf("%d", &j);
 
     //Inicializa lista
     InicializaProd(&lisprod);
     //Inicializa Matriz
-    checkfunctionM = InicializaMatriz(&lista);
-    //Células cabeça criadas a partir da principal de acordo com o número de linhas e colunas
-    //Linhas
-    checkfunctionC = InicializaColuna(&lista, j);
-    //colunas
-    checkfunctionL = InicializaLinha(&lista, i);
+    InicializaMatriz(&lista);
 
-    if(checkfunctionL == 1 && checkfunctionC == 1 && checkfunctionM == 1){
-        printf("Linha inicializada com sucesso...\n");
-        printf("Coluna inicializada com sucesso...\n");
-        printf("Matriz incializada com sucesso!\n");
-    } else{
-        printf("Matriz não inicializada\n");
-    }
 
     do{
         printf("Entre com a operacao desejada:\n");
@@ -81,8 +64,8 @@ int main() {
             ImprimeMatriz(&lista);
         }
         else if(cod_op == 3){
-            ImprimeMatrizL(&lista, i);
-            ImprimeMatrizC(&lista, j);
+            ImprimeMatrizL(&lista, qtd_i);
+            ImprimeMatrizC(&lista, qtd_j);
         }
         else if(cod_op == 4){
             scanf("%d %s", &produtos.qtdproduto, produtos.datacompra);
@@ -103,17 +86,5 @@ int main() {
         }
 
     }while(cod_op != 0);
-
-    /*
-    //Entrada por Arquivo
-    char nome_arq[100];
-    char texto[1000];
-    scanf("%s", &nome_arq);
-    FILE *ptr_arq;
-    ptr_arq = fopen(nome_arq, "r");
-    while(strcpy(texto, ptr_arq) != NULL) {
-        printf("%s", texto);
-    }
-     */
     return 0;
 }
